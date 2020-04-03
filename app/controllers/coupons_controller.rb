@@ -9,9 +9,10 @@ class CouponsController < ApplicationController
 
     def create
         # @coupon = Coupon.create(coupon_code: params[:coupon][:coupon_code], store: params[:coupon][:store])
-        # redirect_to coupon_path(@coupon)
-
+        
         @coupon = Coupon.create(coupon_params)
+
+        redirect_to coupon_path(@coupon)
     end
 
     def show
@@ -19,8 +20,8 @@ class CouponsController < ApplicationController
     end
     
     private
-
+    # need to do this in order to overcome the ForbiddenAttributesError (makes app more secure)
     def coupon_params
-        params.require(:pizza).permit(:coupon_code, :store)
+        params.require(:coupon).permit(:coupon_code, :store)
     end
 end
