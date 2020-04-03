@@ -10,9 +10,15 @@ class CouponsController < ApplicationController
     def create
         # @coupon = Coupon.create(coupon_code: params[:coupon][:coupon_code], store: params[:coupon][:store])
         
-        @coupon = Coupon.create(coupon_params)
+        @coupon = Coupon.new(coupon_params)
 
-        redirect_to coupon_path(@coupon)
+        # if coupon_code is unique, @coupon will save and redirect, otherwise it will render the :new page so user can put in a new code
+        if @coupon.save
+            redirect_to coupon_path(@coupon)
+        else
+            render :new
+        end
+
     end
 
     def show
