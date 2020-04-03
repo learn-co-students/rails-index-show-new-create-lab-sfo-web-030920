@@ -26,7 +26,7 @@ class CouponsController < ApplicationController
     end
     
     private
-    # need to do this in order to overcome the ForbiddenAttributesError (makes app more secure)
+    # need use strong params in order to overcome the ForbiddenAttributesError (makes app more secure)
     def coupon_params
         params.require(:coupon).permit(:coupon_code, :store)
     end
